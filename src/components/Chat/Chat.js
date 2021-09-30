@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import Header from '../Header';
 import Input from '../Input';
 import Button from '../Button';
-import MessageList from '../MessageList/MessageList';
+import MessageList from '../MessageList';
 
-export default class Chat extends Component {
+class Chat extends Component {
     // constructor( props ) {
     //     super(props);
     // }
@@ -21,7 +21,6 @@ export default class Chat extends Component {
     handleInputChange = event => {
         const inputMessage = event.target.value;
         this.setState({ currentMessage: inputMessage });
-        console.log(this.state.currentMessage);
     }
     addMessage = () => {
         const { currentMessage } = this.state;
@@ -43,29 +42,29 @@ export default class Chat extends Component {
     render() {
         const { currentMessage, messages } = this.state;
         const { handleInputChange, addMessage } = this;
-        const { children } = this.props.children;
+        const { children } = this.props;
         return (
             <div>
-                {/* w tej metodzie brak możliwości przekazania propsów do dzieci */}
-                {/* {this.props.children} */}
-
                 {React.Children.map( children, child => {
-                    if (child.type.displayName === "Header") return React.cloneElement(child);
-                    if (child.type.displayName === "Input") return React.cloneElement(child, { value: currentMessage, onChange: handleInputChange });
-                    if (child.type.displayName === "Button") return React.cloneElement(child, { label: "Add message!", onClick: addMessage });
-                    if (child.type.displayName === "MessageList") return React.cloneElement(child, { messages });
+                    if (child.type.displayName === "Header") {
+                        return React.cloneElement(child);
+                    }
+                    if (child.type.displayName === "Input") {
+                        return React.cloneElement(child, {
+                            value: currentMessage,
+                            onChange: handleInputChange
+                        });
+                    }
+                    if (child.type.displayName === "Button") {
+                        return React.cloneElement(child, { label: "Add message!", onClick: addMessage });
+                    }
+                    if (child.type.displayName === "MessageList") {
+                        return React.cloneElement(child, { messages });
+                    }
                     return child;
                 })}
-                {/* <Header />
-                <Input
-                    value={ currentMessage }
-                    onChange={ handleInputChange } />
-                <Button
-                    label="Add message"
-                    onClick={ addMessage } />
-                <MessageList
-                    messages={ messages }/> */}
             </div>
         )
     }
 }
+export default Chat;
