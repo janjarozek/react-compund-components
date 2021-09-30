@@ -1,9 +1,11 @@
-import './App.css';
+import './styles/App.scss';
+
+import Chat from './components/Chat';
 
 function App() {
   return (
     <div className="App">
-      {/*  */}
+      <Chat />
     </div>
   );
 }
