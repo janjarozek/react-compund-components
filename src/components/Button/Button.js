@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Button({label, onClick}) {
+function Button({label, onClick}) {
     return (
         <button onClick={onClick}>{label}</button>
     )
 }
+Button.displayName = "Button";
+export default Button;

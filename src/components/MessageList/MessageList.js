@@ -2,7 +2,7 @@ import React from 'react'
 
 import Message from './Message';
 
-export default function MessageList({ messages }) {
+function MessageList({ messages }) {
     return (
         <ul className="message-list">
             {messages.map( (msg, i) => (
@@ -13,3 +13,5 @@ export default function MessageList({ messages }) {
         </ul>
     )
 }
+MessageList.displayName = "MessageList";
+export default MessageList;

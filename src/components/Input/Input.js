@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Input({ value, onChange }) {
+function Input({ value, onChange }) {
     return (
         <input value={value} placeholder="Messege ..." onChange={onChange}></input>
     )
 }
+Input.displayName = "Input";
+export default Input;

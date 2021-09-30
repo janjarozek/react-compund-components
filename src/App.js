@@ -5,7 +5,12 @@ import Chat from './components/Chat';
 function App() {
   return (
     <div className="App">
-      <Chat />
+      <Chat>
+        <Chat.Header />
+        <Chat.Input />
+        <Chat.Button />
+        <Chat.MessageList />
+      </Chat>
     </div>
   );
 }

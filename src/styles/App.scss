@@ -44,9 +44,8 @@ $app-color-dark: hsl(100, 50%, 25%);
 
 .message-list {
   text-align: left;
-  ul {
-    margin: 0px;
-  }
+  margin: 0px;
+  padding: 0px;
   li {
     list-style-type: none;
     padding: 10px 0px;

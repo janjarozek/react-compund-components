@@ -9,6 +9,11 @@ export default class Chat extends Component {
     // constructor( props ) {
     //     super(props);
     // }
+    static Header = Header;
+    static Input = Input;
+    static Button = Button;
+    static MessageList = MessageList;
+
     state = {
         currentMessage: "",
         messages: []
@@ -36,17 +41,30 @@ export default class Chat extends Component {
     }
 
     render() {
+        const { currentMessage, messages } = this.state;
+        const { handleInputChange, addMessage } = this;
+        const { children } = this.props.children;
         return (
             <div>
-                <Header />
+                {/* w tej metodzie brak możliwości przekazania propsów do dzieci */}
+                {/* {this.props.children} */}
+
+                {React.Children.map( children, child => {
+                    if (child.type.displayName === "Header") return React.cloneElement(child);
+                    if (child.type.displayName === "Input") return React.cloneElement(child, { value: currentMessage, onChange: handleInputChange });
+                    if (child.type.displayName === "Button") return React.cloneElement(child, { label: "Add message!", onClick: addMessage });
+                    if (child.type.displayName === "MessageList") return React.cloneElement(child, { messages });
+                    return child;
+                })}
+                {/* <Header />
                 <Input
-                    value={ this.state.currentMessage }
-                    onChange={ this.handleInputChange } />
+                    value={ currentMessage }
+                    onChange={ handleInputChange } />
                 <Button
                     label="Add message"
-                    onClick={this.addMessage} />
+                    onClick={ addMessage } />
                 <MessageList
-                    messages={ this.state.messages }/>
+                    messages={ messages }/> */}
             </div>
         )
     }
